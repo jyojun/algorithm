@@ -1,7 +1,6 @@
 L = int(input())
 R = int(input())
 
-length = 6
 total_length = 0
 count = 1
 while True:
