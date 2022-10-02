@@ -35,5 +35,4 @@ rl.on("close", () => {
 
   bfs(0, 0);
   console.log(map[n - 1][m - 1]);
-  process.exit();
 });
