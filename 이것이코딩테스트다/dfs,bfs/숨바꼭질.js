@@ -15,24 +15,40 @@ rl.on("close", () => {
   let n = parseInt(input.split(" ")[0]);
   let k = parseInt(input.split(" ")[1]);
 
-  let visited = new Array(100000).fill(1);
+  let visited = Array.from({ length: 100100 }, () => false);
 
-  const queue = [n];
   function bfs(x) {
-    if (x === k) {
-      console.log(result);
-    }
     visited[x] = true;
-
+    let queue = [[x, 0]];
     while (queue.length > 0) {
-      loc = queue.shift();
+      let loc = queue.shift();
+      let dx;
+
+      if (loc[0] === k) {
+        console.log(loc[1]);
+        return;
+      }
 
       // -1 칸
+      dx = loc[0] - 1;
+      if (0 <= dx && dx <= 100000 && visited[dx] === false) {
+        visited[dx] = true;
+        queue.push([dx, loc[1] + 1]);
+      }
       // +1 칸
+      dx = loc[0] + 1;
+      if (0 <= dx && dx <= 100000 && visited[dx] === false) {
+        visited[dx] = true;
+        queue.push([dx, loc[1] + 1]);
+      }
       // *2 칸
+      dx = loc[0] * 2;
+      if (0 <= dx && dx <= 1000000 && visited[dx] === false) {
+        visited[dx] = true;
+        queue.push([dx, loc[1] + 1]);
+      }
     }
   }
 
-  bfs(0, 0);
-  console.log(map[n - 1][m - 1]);
+  bfs(n);
 });
